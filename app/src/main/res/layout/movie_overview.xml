@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_margin2x">
+
+        <RatingBar
+            android:id="@+id/movie_rating_bar"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin2x"
+            android:numStars="@integer/max_movie_rating"
+            android:theme="@style/movieRatingBar"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:rating="3"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/movie_favorite_switch"
+            style="@style/movieFavoriteSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/favorite_switch"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_rating_bar"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/movie_rating_bar"/>
+
+        <ImageView
+            android:id="@+id/movie_time_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin2x"
+            android:contentDescription="@string/content_description_ic_time"
+            android:src="@drawable/ic_access_time_black_36dp"
+            app:layout_constraintLeft_toLeftOf="@+id/movie_rating_bar"
+            app:layout_constraintTop_toBottomOf="@+id/movie_rating_bar"/>
+
+        <TextView
+            android:id="@+id/movie_runtime_textview"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin2x"
+            android:layout_marginStart="@dimen/default_margin2x"
+            android:textColor="@color/colorPrimaryText"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_time_ic"
+            app:layout_constraintLeft_toRightOf="@+id/movie_time_ic"
+            app:layout_constraintTop_toTopOf="@+id/movie_time_ic"
+            tools:text="2h 13min"/>
+
+        <TextView
+            android:id="@+id/movie_release_date_textview"
+            style="@style/movieReleaseDate"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_runtime_textview"
+            app:layout_constraintLeft_toRightOf="@+id/movie_runtime_textview"
+            app:layout_constraintTop_toTopOf="@+id/movie_runtime_textview"
+            tools:text="(2017)"/>
+
+        <TextView
+            android:id="@+id/synopsis_label"
+            style="@style/movieLabel"
+            android:text="@string/synopsis_label"
+            app:layout_constraintLeft_toLeftOf="@+id/movie_time_ic"
+            app:layout_constraintTop_toBottomOf="@+id/movie_time_ic"/>
+
+        <TextView
+            android:id="@+id/movie_overview_textview"
+            style="@style/movieOverviewTextview"
+            app:layout_constraintLeft_toLeftOf="@id/synopsis_label"
+            app:layout_constraintTop_toBottomOf="@id/synopsis_label"
+            tools:text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>

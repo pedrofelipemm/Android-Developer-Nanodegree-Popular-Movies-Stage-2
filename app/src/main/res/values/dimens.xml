@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_margin">8dp</dimen>
+    <dimen name="default_margin2x">16dp</dimen>
+
+    <dimen name="default_elevation">4dp</dimen>
+
+    <dimen name="movieTabTextSize">16sp</dimen>
+
+    <dimen name="movieCollapsingToolbarHeight">300dp</dimen>
+    <dimen name="movieCollapsingToolbarTitleMarginEnd">64dp</dimen>
+    <dimen name="movieCollapsingToolbarTitleMarginStart">32dp</dimen>
+
+    <!-- Keeping the default value for phone, wich is defined in dp at sdk. (@style/TextAppearance.AppCompat.Widget.ActionBar.Title) -->
+    <dimen name="movieTitleTextSize">20dp</dimen>
+
+    <dimen name="movieReleaseDateLeftMargin">32dp</dimen>
+
+    <dimen name="movieSynopsisLabelMarginTop">32dp</dimen>
+    <dimen name="movieSynopsisLabelTextSize">32sp</dimen>
+
+    <dimen name="movieTrailerThumbWidth">240dp</dimen>
+    <dimen name="movieTrailerThumbHeight">180dp</dimen>
+    <dimen name="movieTrailerTitleMargin">4dp</dimen>
+    <dimen name="movieTrailerTitleTextSize">22sp</dimen>
+
+    <dimen name="movieReviewContentMarginTop">4dp</dimen>
+</resources>

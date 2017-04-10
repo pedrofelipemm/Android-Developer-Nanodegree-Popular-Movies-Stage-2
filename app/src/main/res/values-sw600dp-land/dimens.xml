@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="movieTrailerThumbWidth">480dp</dimen>
+    <dimen name="movieTrailerThumbHeight">360dp</dimen>
+</resources>

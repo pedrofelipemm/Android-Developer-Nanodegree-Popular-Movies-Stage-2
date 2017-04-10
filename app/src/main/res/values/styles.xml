@@ -1,0 +1,99 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="toolbarStyle">@style/Toolbar</item>
+    </style>
+
+    <style name="Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="popupTheme">@style/Theme.AppCompat.Light</item>
+    </style>
+
+    <style name="movieRatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorPrimaryText</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="movieFavoriteSwitch">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="movieTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">?android:attr/textColorPrimaryInverse</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabSelectedTextColor">?android:attr/textColorPrimaryInverse</item>
+        <item name="tabTextAppearance">@style/movieTabTextAppearance</item>
+    </style>
+
+    <style name="movieTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/movieTabTextSize</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="movieCollapsingToolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/movieCollapsingToolbarHeight</item>
+        <item name="contentScrim">?attr/colorPrimary</item>
+        <item name="layout_scrollFlags">scroll|snap</item>
+        <item name="expandedTitleMarginEnd">@dimen/movieCollapsingToolbarTitleMarginEnd</item>
+        <item name="expandedTitleMarginStart">@dimen/movieCollapsingToolbarTitleMarginStart</item>
+    </style>
+
+    <style name="movieTitleTextview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Widget.ActionBar.Title</item>
+        <item name="android:textSize">@dimen/movieTitleTextSize</item>
+    </style>
+
+    <style name="movieReleaseDate" parent="TextAppearance.AppCompat.Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">@dimen/movieReleaseDateLeftMargin</item>
+        <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">@dimen/movieReleaseDateLeftMargin
+        </item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <style name="movieLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/movieSynopsisLabelMarginTop</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/movieSynopsisLabelTextSize</item>
+    </style>
+
+    <style name="movieOverviewTextview" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/default_margin2x</item>
+    </style>
+
+    <style name="movieReviewAuthor" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="movieReviewContent" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/movieReviewContentMarginTop</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">5</item>
+    </style>
+
+    <style name="movieTrailerContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+</resources>

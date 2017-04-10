@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_margin">24dp</dimen>
+    <dimen name="default_margin2x">48dp</dimen>
+
+    <dimen name="movieTabTextSize">24sp</dimen>
+
+    <dimen name="movieCollapsingToolbarHeight">600dp</dimen>
+
+    <!-- Increasing the default value for tablet, wich is defined in dp at sdk. (@style/TextAppearance.AppCompat.Widget.ActionBar.Title) -->
+    <dimen name="movieTitleTextSize">30dp</dimen>
+
+    <dimen name="movieSynopsisLabelMarginTop">48dp</dimen>
+    <dimen name="movieSynopsisLabelTextSize">48sp</dimen>
+
+    <dimen name="movieTrailerThumbWidth">360dp</dimen>
+    <dimen name="movieTrailerThumbHeight">270dp</dimen>
+    <dimen name="movieTrailerTitleMargin">8dp</dimen>
+    <dimen name="movieTrailerTitleTextSize">48sp</dimen>
+
+</resources>

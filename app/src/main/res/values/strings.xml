@@ -1,0 +1,51 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Popular Movies</string>
+
+    <string name="popular_movies">Popular Movies</string>
+    <string name="top_rated_movies">Top Rated Movies</string>
+
+    <string name="settings_orderby_most_popular">Most Popular</string>
+    <string name="settings_orderby_top_rated">Top Rated</string>
+    <string name="error_no_connection">No connection detected.\nPlease verify.</string>
+    <string name="poster_image_of_the_movie">Poster image of the movie.</string>
+
+    <string name="movie_fragment_invalid_position">Invalid position: <xliff:g id="position">%d</xliff:g></string>
+    <string name="movie_fragment_title1">Overview</string>
+    <string name="movie_fragment_title2">Trailers</string>
+    <string name="movie_fragment_title3">Reviews</string>
+
+    <string name="content_description_ic_time">An icon of a clock, followed by movie length</string>
+
+    <string name="synopsis_label">Synopsis</string>
+    <string name="overview_label">Overview</string>
+    <string name="reviews_label">Reviews</string>
+    <string name="trailers_label">Trailers</string>
+
+    <string name="required_parameter">Required parameter: <xliff:g id="videoId">%s</xliff:g></string>
+    <string name="movie_trailer_thumbnail">Movie trailer thumbnail</string>
+
+    <string name="runtime_formatted"><xliff:g id="hour">%d</xliff:g>h <xliff:g id="min">%d</xliff:g>min</string>
+    <string name="relase_date_formatted">(<xliff:g id="releaseDate">%s</xliff:g>)</string>
+
+    <string name="movie_activity_network_error">Some information might not be available due connection problem.\nVerify your device, please.</string>
+
+    <string name="content_authority">study.pmoreira.popularmovies</string>
+    <string name="error_unknown_uri">Cannot query unknown URI: <xliff:g id="unknown_uri">%s</xliff:g></string>
+    <string name="error_insertion_failed">Failed to insert row for <xliff:g id="error_insertion">%s</xliff:g></string>
+    <string name="field_required">Field required: <xliff:g id="field_name">%s</xliff:g></string>
+    <string name="error_provider_operation_not_supported"><xliff:g id="operation">%s</xliff:g> not supported for <xliff:g id="uri">%s</xliff:g></string>
+    <string name="movie_fav_error">Error while favoriting movie :(</string>
+    <string name="movie_unfav_error">Error while unfavoriting movie :(</string>
+    <string name="favorite_switch">Favorite</string>
+    <string name="settings_orderby_favorite">Favorite</string>
+    <string name="favorited_movies">Favorites</string>
+
+    <string name="trailer_number">Trailer <xliff:g id="number">%d</xliff:g></string>
+    <string name="runtime_not_available">Not Available</string>
+
+    <string name="transition_movie_thumbnail">transition_movie_thumbnail</string>
+
+    <string name="no_trailers_available">No trailers available.</string>
+    <string name="no_reviews_available">No reviews available.</string>
+    <string name="no_favorite_movie">No favorites yet :(</string>
+</resources>
