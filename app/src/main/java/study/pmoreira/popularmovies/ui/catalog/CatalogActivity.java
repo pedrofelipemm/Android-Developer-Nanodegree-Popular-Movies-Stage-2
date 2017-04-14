@@ -38,7 +38,7 @@ public class CatalogActivity extends AppCompatActivity {
 
     MovieBusiness mMovieBusiness;
 
-    private List<Movie> mMovies;
+    private List<Movie> mMovies = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
