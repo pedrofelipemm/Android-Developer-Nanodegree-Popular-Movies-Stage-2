@@ -164,6 +164,7 @@ public class OverviewFragment extends Fragment {
                 Toast.makeText(getContext(), R.string.movie_unfav_error, Toast.LENGTH_SHORT).show();
                 mMovieFavSwitch.setChecked(true);
             }
+            ((MovieActivity) getContext()).setFavChanged(deleted);
         }
     }
 

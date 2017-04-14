@@ -1,5 +1,6 @@
 package study.pmoreira.popularmovies.ui.movie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -18,14 +19,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import study.pmoreira.popularmovies.R;
 import study.pmoreira.popularmovies.entity.Movie;
+import study.pmoreira.popularmovies.ui.catalog.CatalogActivity;
 import study.pmoreira.popularmovies.utils.NetworkUtils;
 import study.pmoreira.popularmovies.utils.ScreenUtils;
 
+import static study.pmoreira.popularmovies.ui.catalog.CatalogActivity.EXTRA_FROM_FAV;
+import static study.pmoreira.popularmovies.ui.catalog.CatalogActivity.EXTRA_RELOAD_FAV;
 import static study.pmoreira.popularmovies.ui.movie.OverviewFragment.ARG_MOVIE;
 
 public class MovieActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE = "EXTRA_MOVIE";
+    public static final String EXTRA_FAV_CHANGED = "EXTRA_FAV_CHANGED";
+
     public static final String ARG_MOVIE_ID = "ARG_MOVIE_ID";
 
     @BindView(R.id.movie_poster_imageview)
@@ -48,6 +54,8 @@ public class MovieActivity extends AppCompatActivity {
     @BindView(R.id.movie_viewPager)
     ViewPager mMovieViewPager;
 
+    private boolean mFavChanged;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +67,10 @@ public class MovieActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.movie_activity_network_error, Toast.LENGTH_LONG).show();
         } else {
             showLoading();
+        }
+
+        if (savedInstanceState != null) {
+            mFavChanged = savedInstanceState.getBoolean(EXTRA_FAV_CHANGED);
         }
 
         initViews();
@@ -113,11 +125,33 @@ public class MovieActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(EXTRA_FAV_CHANGED, mFavChanged);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (getIntent().getBooleanExtra(EXTRA_FROM_FAV, false) && mFavChanged) {
+            Intent intent = new Intent(this, CatalogActivity.class);
+            intent.putExtra(EXTRA_RELOAD_FAV, true);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+    }
+
     void showLoading() {
         mMovieProgressBar.setVisibility(View.VISIBLE);
     }
 
     void hideLoading() {
         mMovieProgressBar.setVisibility(View.GONE);
+    }
+
+    void setFavChanged(boolean favChanged) {
+        mFavChanged = favChanged;
     }
 }

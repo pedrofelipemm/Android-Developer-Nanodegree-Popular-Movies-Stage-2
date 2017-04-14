@@ -3,7 +3,6 @@ package study.pmoreira.popularmovies.ui.catalog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +31,9 @@ public class CatalogActivity extends AppCompatActivity {
 
     private static final int CATALOG_COLUMN_SPAN = 2;
 
+    public static final String EXTRA_FROM_FAV = "EXTRA_FROM_FAV";
+    public static final String EXTRA_RELOAD_FAV = "EXTRA_RELOAD_FAV";
+
     @BindView(R.id.catalog_toolbar)
     Toolbar mToolbar;
 
@@ -44,8 +46,6 @@ public class CatalogActivity extends AppCompatActivity {
     MovieBusiness mMovieBusiness;
 
     private List<Movie> mMovies = new ArrayList<>();
-
-    Parcelable mCatalogLayoutState;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +65,10 @@ public class CatalogActivity extends AppCompatActivity {
         if (savedInstanceState != null && (mMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES)) != null
                 && !mMovies.isEmpty()) {
             mCatalogRecyclerView.setAdapter(new CatalogAdapter(this, mMovies));
-            mCatalogLayoutState = savedInstanceState.getParcelable(STATE_CATALOG_RECYCLERVIEW_LAYOUT);
             setTitle(savedInstanceState.getCharSequence(STATE_TITLE));
+        } else if (getIntent().getBooleanExtra(EXTRA_RELOAD_FAV, false)) {
+            new FavoriteCatalogAsyncTask(this).execute();
+            setTitle(getString(R.string.favorited_movies));
         } else if (NetworkUtils.isNetworkAvailable(this)) {
             new CatalogAsyncTask().execute();
         } else {
@@ -110,14 +112,6 @@ public class CatalogActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (isFavorite() && mCatalogLayoutState == null) {
-            new FavoriteCatalogAsyncTask(this).execute(MovieUrlBuilder.ORDER_BY_TOP_RATED);
-        }
-    }
-
     private void showError(boolean showError) {
         mCatalogRecyclerView.setVisibility(showError ? View.GONE : View.VISIBLE);
         mErrorTextView.setVisibility(showError ? View.VISIBLE : View.GONE);
@@ -129,7 +123,7 @@ public class CatalogActivity extends AppCompatActivity {
         mErrorTextView.setText(errorMessage);
     }
 
-    public boolean isFavorite() {
+    boolean isFavorite() {
         return getTitle().equals(getString(R.string.favorited_movies));
     }
 

@@ -71,6 +71,7 @@ class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder> {
 
                     Intent intent = new Intent(mContext, MovieActivity.class);
                     intent.putExtra(MovieActivity.EXTRA_MOVIE, movie);
+                    intent.putExtra(CatalogActivity.EXTRA_FROM_FAV, ((CatalogActivity) mContext).isFavorite());
 
                     mContext.startActivity(intent, options.toBundle());
 
