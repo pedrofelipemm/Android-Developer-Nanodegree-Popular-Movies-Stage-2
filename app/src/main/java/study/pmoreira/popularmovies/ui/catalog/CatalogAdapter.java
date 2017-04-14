@@ -1,15 +1,14 @@
 package study.pmoreira.popularmovies.ui.catalog;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -22,40 +21,43 @@ import study.pmoreira.popularmovies.R;
 import study.pmoreira.popularmovies.entity.Movie;
 import study.pmoreira.popularmovies.ui.movie.MovieActivity;
 
-class CatalogAdapter extends ArrayAdapter<Movie> {
+class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder> {
+
+    private Context mContext;
+    private LayoutInflater mInflater;
+
+    private List<Movie> mMovies;
 
     CatalogAdapter(Context context, List<Movie> movies) {
-        super(context, 0, movies);
+        mContext = context;
+        mInflater = LayoutInflater.from(context);
+
+        mMovies = movies;
     }
 
-    static class ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.poster_imageview)
         ImageView posterImageView;
 
         ViewHolder(View view) {
+            super(view);
             ButterKnife.bind(this, view);
         }
 
     }
 
     @Override
-    @SuppressLint("InflateParams")
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.catalog_item, null);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(mInflater.inflate(R.layout.catalog_item, parent, false));
+    }
 
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-
-        final Movie movie = getItem(position);
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final Movie movie = mMovies.get(position);
 
         if (movie != null) {
-            Picasso.with(getContext())
+            Picasso.with(mContext)
                     .load(movie.getPosterUrl())
                     .placeholder(R.drawable.no_image)
                     .error(R.drawable.no_image)
@@ -65,17 +67,20 @@ class CatalogAdapter extends ArrayAdapter<Movie> {
                 @Override
                 public void onClick(View v) {
                     ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity)
-                            getContext(), v, getContext().getString(R.string.transition_movie_thumbnail));
+                            mContext, v, mContext.getString(R.string.transition_movie_thumbnail));
 
-                    Intent intent = new Intent(getContext(), MovieActivity.class);
+                    Intent intent = new Intent(mContext, MovieActivity.class);
                     intent.putExtra(MovieActivity.EXTRA_MOVIE, movie);
 
-                    getContext().startActivity(intent, options.toBundle());
+                    mContext.startActivity(intent, options.toBundle());
 
                 }
             });
         }
+    }
 
-        return convertView;
+    @Override
+    public int getItemCount() {
+        return mMovies.size();
     }
 }

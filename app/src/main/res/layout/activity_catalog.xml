@@ -14,13 +14,11 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <GridView
-        android:id="@+id/catalog_gridview"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/catalog_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"/>
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/error_textview"

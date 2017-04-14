@@ -3,12 +3,14 @@ package study.pmoreira.popularmovies.ui.catalog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,12 +28,15 @@ public class CatalogActivity extends AppCompatActivity {
 
     private static final String STATE_MOVIES = "STATE_MOVIES";
     private static final String STATE_TITLE = "STATE_TITLE";
+    private static final String STATE_CATALOG_RECYCLERVIEW_LAYOUT = "STATE_CATALOG_RECYCLERVIEW_LAYOUT";
+
+    private static final int CATALOG_COLUMN_SPAN = 2;
 
     @BindView(R.id.catalog_toolbar)
     Toolbar mToolbar;
 
-    @BindView(R.id.catalog_gridview)
-    GridView mCatalogGridView;
+    @BindView(R.id.catalog_recyclerview)
+    RecyclerView mCatalogRecyclerView;
 
     @BindView(R.id.error_textview)
     TextView mErrorTextView;
@@ -39,6 +44,8 @@ public class CatalogActivity extends AppCompatActivity {
     MovieBusiness mMovieBusiness;
 
     private List<Movie> mMovies = new ArrayList<>();
+
+    Parcelable mCatalogLayoutState;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +60,12 @@ public class CatalogActivity extends AppCompatActivity {
     }
 
     private void initCatalog(Bundle savedInstanceState) {
-        if (savedInstanceState != null && (mMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES)) != null) {
-            mCatalogGridView.setAdapter(new CatalogAdapter(this, mMovies));
+        mCatalogRecyclerView.setLayoutManager(new GridLayoutManager(this, CATALOG_COLUMN_SPAN));
+
+        if (savedInstanceState != null && (mMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES)) != null
+                && !mMovies.isEmpty()) {
+            mCatalogRecyclerView.setAdapter(new CatalogAdapter(this, mMovies));
+            mCatalogLayoutState = savedInstanceState.getParcelable(STATE_CATALOG_RECYCLERVIEW_LAYOUT);
             setTitle(savedInstanceState.getCharSequence(STATE_TITLE));
         } else if (NetworkUtils.isNetworkAvailable(this)) {
             new CatalogAsyncTask().execute();
@@ -69,6 +80,8 @@ public class CatalogActivity extends AppCompatActivity {
 
         outState.putCharSequence(STATE_TITLE, getTitle());
         outState.putParcelableArrayList(STATE_MOVIES, new ArrayList<>(mMovies));
+        outState.putParcelable(STATE_CATALOG_RECYCLERVIEW_LAYOUT,
+                mCatalogRecyclerView.getLayoutManager().onSaveInstanceState());
     }
 
     @Override
@@ -100,13 +113,13 @@ public class CatalogActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (getTitle().equals(getString(R.string.favorited_movies))) {
+        if (isFavorite() && mCatalogLayoutState == null) {
             new FavoriteCatalogAsyncTask(this).execute(MovieUrlBuilder.ORDER_BY_TOP_RATED);
         }
     }
 
     private void showError(boolean showError) {
-        mCatalogGridView.setVisibility(showError ? View.GONE : View.VISIBLE);
+        mCatalogRecyclerView.setVisibility(showError ? View.GONE : View.VISIBLE);
         mErrorTextView.setVisibility(showError ? View.VISIBLE : View.GONE);
         mErrorTextView.setText(getString(R.string.error_no_connection));
     }
@@ -114,6 +127,10 @@ public class CatalogActivity extends AppCompatActivity {
     private void showError(boolean showError, String errorMessage) {
         showError(showError);
         mErrorTextView.setText(errorMessage);
+    }
+
+    public boolean isFavorite() {
+        return getTitle().equals(getString(R.string.favorited_movies));
     }
 
     private class CatalogAsyncTask extends AsyncTask<String, Void, List<Movie>> {
@@ -131,7 +148,7 @@ public class CatalogActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Movie> movies) {
             mMovies = movies;
-            mCatalogGridView.setAdapter(new CatalogAdapter(CatalogActivity.this, movies));
+            mCatalogRecyclerView.setAdapter(new CatalogAdapter(CatalogActivity.this, movies));
             showError(movies.isEmpty());
         }
     }
@@ -152,7 +169,7 @@ public class CatalogActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Movie> movies) {
             mMovies = movies;
-            mCatalogGridView.setAdapter(new CatalogAdapter(CatalogActivity.this, movies));
+            mCatalogRecyclerView.setAdapter(new CatalogAdapter(CatalogActivity.this, movies));
             showError(movies.isEmpty(), mContext.getString(R.string.no_favorite_movie));
         }
     }
